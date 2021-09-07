@@ -18,6 +18,10 @@ const Tasks = db.define('task', {
     done: {
         type: sequelize.DataTypes.BOOLEAN,
         defaultValue: false,
+    },
+    priority: {
+        type: sequelize.DataTypes.ENUM('high', 'normal', 'low'),
+        defaultValue: 'normal'
     }
 
 }) 
