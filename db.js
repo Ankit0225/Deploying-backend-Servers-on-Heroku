@@ -1,14 +1,15 @@
 const sequelize = require('sequelize')
 
-const db = new sequelize({
-    // dialect: 'sqlite',
-    // storage: __dirname + '/tasks.db'
-    dialect: 'postgres',
-    database: 'd81s14a2jm0l8b',
-    username: 'roivnbkucogfyw',
-    password:  'c885f085e9d21dc3cfcc718d29666addf528631ca2710bcc4f0bc2af88e59e9f',
-    host: 'ec2-44-195-201-3.compute-1.amazonaws.com',
-})
+let db;
+if (process.env.DATABASE_URL) {
+    db = new sequelize(process.env.DATABASE_URL)
+}
+else {
+    db = new sequelize ({
+        dialect: 'sqlite',
+        storage: __dirname + '/tasks.db'
+    })
+}
 
 const Tasks = db.define('task', {
     id: {
